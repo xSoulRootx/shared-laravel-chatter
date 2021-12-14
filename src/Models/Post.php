@@ -33,6 +33,9 @@ class Post extends Model
             $field = Markdown::convertToHtml($this->discussion->post[0]->body);
         }
 
+        // add nofollow to user generated links
+        $field = preg_replace('!<a\s+!i', '<a rel="nofollow" ', $field);
+
         return $field;
     }
 
